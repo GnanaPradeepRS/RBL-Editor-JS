@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBL Editor</title>
+
+    <link rel = "icon" type = "image/png" href = "/icon.png">
+    <!-- For apple devices -->
+    <link rel = "apple-touch-icon" type = "image/png" href = "/icon.png"/>
+
+    <script src="https://kit.fontawesome.com/5c8ed5667f.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css" media="screen">
+        #editor { 
+            position: absolute;
+            top: 100px;
+            right: 50px;
+            bottom: 50px;
+            left: 50px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    
+</head>
+<body>
+
+    <div class="addMore" style="margin-top: 20px; margin-left: 50px;">
+        <span style="margin-right: 20px;">
+            <i title="bold" class="fa fa-bold fa-lg" onclick="execCmd('bold')" style="margin-right: 5px;"></i>
+            <i title="italic" class="fa f`a-italic fa-lg" onclick="execCmd('italic')" style="margin-right: 5px;"></i>
+            <i title="highlight text" class="fa fa-highlighter fa-lg" style="margin-right: 5px;" onclick="highlightSelection();"></i>
+        </span>
+
+               
+
+        <span style="margin-right: 20px;">
+            <i title="Validation Format" class="fa fa-check-circle fa-lg" style="margin-right: 5px;"></i>
+            <i title="API Validation" class="fa fa-file-code fa-lg" style="margin-right: 5px;" onclick="APIValidation();"></i>
+        </span>
+
+        <span style="margin-right: 20px;">
+            <i title="Word Format" class="fa fa-align-center fa-lg" style="margin-right: 5px;" onclick="wordFormat()"></i>
+            <i title="Word Reformat" class="fa fa-file-text-o fa-lg" style="margin-right: 5px;" onclick="inlineFormat()"></i>
+        </span>
+
+        <i title="Copy Inline" class="fa fa-files-o fa-lg" style="margin-right: 20px;"></i>
+
+        <select name="file-type" id="file-type" style="margin-right: 20px;">
+            <option value="none">Select File Type</option>
+            <option value="computation">Computation</option>
+            <option value="validation">Validation</option>
+            <option value="computationpostprocess">Computation Post Process</option>
+            <option value="validationpostprocess">Vadidation Post Process</option>
+        </select>
+
+        <select name="locale" id="locale" style="margin-right: 20px;">
+            <option value="">Select Locale</option>
+        </select>
+
+        <span style="margin-right: 20px;">
+            <i title="Word Style" class="fa fa-wikipedia-w fa-lg" style="margin-right: 5px;"></i>
+            <i title="Line Numbering" class="fa fa-list-ol fa-lg" style="margin-right: 5px;"></i>
+        </span>
+
+        <i title="Clear Editor" class="fa fa-paint-brush fa-lg" style="margin-right: 20px;"></i>
+        <i title="Settings" class="fa fa-cog fa-lg" style="margin-right: 30px;" onclick="settings();"></i>
+        <i title="Exit Editor" class="fa fa-sign-out fa-lg"></i>
+
+        <select name="" id="themes">
+            <option value="theme-ambiance">ambiance</option>
+            <option value="theme-chaos">chaos</option>
+            <option value="theme-chrome">chrome</option>
+            <option value="theme-clouds"></option>
+            <option value="theme-clouds_midnight"></option>
+            <option value="theme-cobalt"></option>
+            <option value="theme-crimson_editor"></option>
+            <option value="theme-dawn"></option>
+            <option value="theme-dracula"></option>
+            <option value="theme-dreamweaver"></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+        </select>
+        
+
+    </div>
+
+    <div class="editorContainer">
+        <div id="editor">function foo(items) {
+            var x = "All this is syntax highlighted";
+            return x; <div id='BR'></div>
+        }</div>
+    
+
+
+    <div id="response-block">
+        <span > &nbsp;&nbsp;&nbsp;  Response Status :</span><br>
+        <span id="status"></span>
+    </div>
+
+</div>
+
+    <script src="script.js"></script>
+    <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="themes/theme-twilight.js"></script>
+    <script src="mode-RBL.js"></script>
+    <script>
+        var editor = ace.edit("editor");
+        var test = "ace/theme/twilight"
+        editor.setTheme(test);
+        editor.session.setMode("ace/mode/javascript");
+    </script>
+
+</body>
+</html>

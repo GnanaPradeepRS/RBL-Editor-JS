@@ -1,0 +1,29 @@
+{
+    "entityModel": {
+      "type": "businessRule",
+      "data": {
+        "attributes": {
+          "definition": {
+            "values": [
+              {
+                "source": "internal",
+                "locale": "en-GB",
+                "id": "25ce92b4-6bb7-4c8e-8d0b-a35990e68486",
+                "value": "varContexts:=\"self:self\";IIF[HaveAnyAttributesChanged[\"_DEFAULT\",\"_DEFAULT\",\"optiongroupdescription\",\"optiongroupstartdate\",\"optiongroupenddate\"],InitiateExportInContext[varContexts,\"true\",\"true\",\"EventHub_JSON_Export_Process\"],false]"
+              }
+            ]
+          },
+          "ruleType": {
+            "values": [
+              {
+                "source": "internal",
+                "locale": "en-GB",
+                "id": "3c742749-c668-4c1f-9888-ae7bc3e8ff19",
+                "value": "validationpostprocess"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
