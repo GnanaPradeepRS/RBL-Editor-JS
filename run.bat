@@ -1,3 +1,3 @@
-npm install http-server -g & ^
-start "" http-server & ^
+call npm install http-server -g
+start "" http-server 
 start "" chrome.bat

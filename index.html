@@ -27,30 +27,28 @@
     
     
 </head>
-<body>
+<body id="body">
 
     <div class="addMore" style="margin-top: 20px; margin-left: 50px;">
-        <span style="margin-right: 20px;">
-            <i title="bold" class="fa fa-bold fa-lg" onclick="execCmd('bold')" style="margin-right: 5px;"></i>
-            <i title="italic" class="fa f`a-italic fa-lg" onclick="execCmd('italic')" style="margin-right: 5px;"></i>
-            <i title="highlight text" class="fa fa-highlighter fa-lg" style="margin-right: 5px;" onclick="highlightSelection();"></i>
-        </span>
+        
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button title="bold" type="button" data-toggle="button" class="btn btn-warning"><i class=" test fa fa-bold fa-lg" onclick="execCmd('bold')"></i></button>
+                <button title="italic" type="button" data-toggle="button" class="btn btn-warning"> <i  class="fa fa-italic fa-lg" onclick="execCmd('italic')" ></i></button>
+                <button title="highlight text"  type="button" class="btn btn-warning"><i  class="fa fa-highlighter fa-lg" onclick="highlightSelection();"></i></button>
+              </div>
+        
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button title="Validation Format" type="button" class="btn btn-success"><i  class="fa fa-check-circle fa-lg"></i></button>
+                <button title="API Validation" type="button" class="btn btn-success"><i  class="fa fa-file-code fa-lg" onclick="APIValidation();"></i></button>           
+            </div>
+        
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" title="Word Format" data-toggle="button" class="btn btn-primary"><i  class="fa fa-align-center fa-lg" onclick="wordFormat()"></i></button>
+                <button type="button" title="Word Reformat" data-toggle="button" class="btn btn-primary"><i  class="fa fa-file-text-o fa-lg" onclick="inlineFormat()"></i></button>
+                <button type="button" title="Copy Inline" class="btn btn-primary"><i  class="fa fa-files-o fa-lg"></i></button>
+              </div>
 
-               
-
-        <span style="margin-right: 20px;">
-            <i title="Validation Format" class="fa fa-check-circle fa-lg" style="margin-right: 5px;"></i>
-            <i title="API Validation" class="fa fa-file-code fa-lg" style="margin-right: 5px;" onclick="APIValidation();"></i>
-        </span>
-
-        <span style="margin-right: 20px;">
-            <i title="Word Format" class="fa fa-align-center fa-lg" style="margin-right: 5px;" onclick="wordFormat()"></i>
-            <i title="Word Reformat" class="fa fa-file-text-o fa-lg" style="margin-right: 5px;" onclick="inlineFormat()"></i>
-        </span>
-
-        <i title="Copy Inline" class="fa fa-files-o fa-lg" style="margin-right: 20px;"></i>
-
-        <select name="file-type" id="file-type" style="margin-right: 20px;">
+        <select name="file-type" id="file-type">
             <option value="none">Select File Type</option>
             <option value="computation">Computation</option>
             <option value="validation">Validation</option>
@@ -58,85 +56,143 @@
             <option value="validationpostprocess">Vadidation Post Process</option>
         </select>
 
-        <select name="locale" id="locale" style="margin-right: 20px;">
+        <select name="locale" id="locale">
             <option value="">Select Locale</option>
         </select>
 
-        <span style="margin-right: 20px;">
-            <i title="Word Style" class="fa fa-wikipedia-w fa-lg" style="margin-right: 5px;"></i>
-            <i title="Line Numbering" class="fa fa-list-ol fa-lg" style="margin-right: 5px;"></i>
-        </span>
-
-        <i title="Clear Editor" class="fa fa-paint-brush fa-lg" style="margin-right: 20px;"></i>
-        <i title="Settings" class="fa fa-cog fa-lg" style="margin-right: 30px;" onclick="settings();"></i>
-        <i title="Exit Editor" class="fa fa-sign-out fa-lg"></i>
-
-        <select name="" id="themes">
-            <option value="theme-ambiance">ambiance</option>
-            <option value="theme-chaos">chaos</option>
-            <option value="theme-chrome">chrome</option>
-            <option value="theme-clouds"></option>
-            <option value="theme-clouds_midnight"></option>
-            <option value="theme-cobalt"></option>
-            <option value="theme-crimson_editor"></option>
-            <option value="theme-dawn"></option>
-            <option value="theme-dracula"></option>
-            <option value="theme-dreamweaver"></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-        </select>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button title="Word Style" type="button" class="btn btn-primary"><i class="fa fa-wikipedia-w fa-lg"></i></button>
+            <button title="Line Numbering"  type="button" data-toggle="button" class="btn btn-primary"><i class="fa fa-list-ol fa-lg"></i></button>
+            <button title="Clear Editor"  type="button" class="btn btn-primary"><i  class="fa fa-paint-brush fa-lg"></i></button>
+          </div>
         
 
-    </div>
+          <button title="Settings" type="button" class="btn btn-secondary"><i  class="fa fa-cog fa-lg" onclick="settings();"></i></button>
+          <button title="Exit Editor" type="button" class="btn btn-danger"><i  class="fa fa-sign-out fa-lg"></i></button>
+        
 
-    <div class="editorContainer">
+        <select id="themes" onchange="editorTheme()">
+            <option value="none">Select Theme</option>
+            <option value="ambiance">Ambiance</option>
+            <option value="chaos">Chaos</option>
+            <option value="chrome">Chrome</option>
+            <option value="clouds">Clouds</option>
+            <option value="clouds_midnight">Clouds Midnight</option>
+            <option value="cobalt">Cobalt</option>
+            <option value="crimson_editor">Crimson Editor</option>
+            <option value="dawn">Dawn</option>
+            <option value="dracula">Dracula</option>
+            <option value="dreamweaver">Dreamweaver</option>
+            <option value="eclipse">Eclipse</option>
+            <option value="github">Github</option>
+            <option value="gob">Gob</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="idle_fingers">Idle Fingers</option>
+            <option value="iplastic">iPlastic</option>
+            <option value="katzenmilch">katzenmilch</option>
+            <option value="kr_theme">KR Theme</option>
+            <option value="kuroir">Kuroir</option>
+            <option value="merbivore">Merbivore</option>
+            <option value="merbivore_soft">Merbivore Soft</option>
+            <option value="mono_industrial">Mono Industrial</option>
+            <option value="monokai">Monokai</option>
+            <option value="pastel_on_dark">Pastel On Dark</option>
+            <option value="solarized_dark">Solarized Dark</option>
+            <option value="solarized_light">Solarized Light</option>
+            <option value="sqlserver">Sqlserver</option>
+            <option value="terminal">Terminal</option>
+            <option value="textmate">Textmate</option>
+            <option value="tomorrow">Tomorrow</option>
+            <option value="tomorrow_night">Tomorrow Night</option>
+            <option value="tomorrow_night_blue">Tomorrow  Night Blue</option>
+            <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
+            <option value="tomorrow_night_eighties">Tomorrow Night Eighties</option>
+            <option value="twilight">twilight</option>
+            <option value="vibrant_ink">Vibrant Ink</option>
+        </select>
+        
+        <button style="float: right;margin-right: 20px;"  id="darkmode" title="toggle dark mode" type="button" class="btn btn-light"><i class="fas fa-adjust fa-2x"  onclick="darkMode()"></i></button>
+        
+
         <div id="editor">function foo(items) {
             var x = "All this is syntax highlighted";
-            return x; <div id='BR'></div>
-        }</div>
-    
+            return x;}
+        </div>
 
+        <div id="response-block" style="display: none;">
+            <span > &nbsp;&nbsp;&nbsp;  Response Status :<br>
+            <span id="status">
+        </div>
 
-    <div id="response-block">
-        <span > &nbsp;&nbsp;&nbsp;  Response Status :</span><br>
-        <span id="status"></span>
-    </div>
-
-</div>
 
     <script src="script.js"></script>
     <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="themes/twilight.js"></script>
+    <script src="themes/theme-ambiance.js"></script>
+    <script src="themes/theme-chaos.js"></script>
+    <script src="themes/theme-chrome.js"></script>
+    <script src="themes/theme-clouds.js"></script>
+    <script src="themes/theme-clouds_midnight.js"></script>
+    <script src="themes/theme-cobalt.js"></script>
+    <script src="themes/theme-crimson_editor.js"></script>
+    <script src="themes/theme-dawn.js"></script>
+    <script src="themes/theme-dracula.js"></script>
+    <script src="themes/theme-dreamweaver.js"></script>
+    <script src="themes/theme-eclipse.js"></script>
+    <script src="themes/theme-github.js"></script>
+    <script src="themes/theme-gob.js"></script>
+    <script src="themes/theme-gruvbox.js"></script>
+    <script src="themes/theme-idle_fingers.js"></script>
+    <script src="themes/theme-iplastic.js"></script>
+    <script src="themes/theme-katzenmilch.js"></script>
+    <script src="themes/theme-kr_theme.js"></script>
+    <script src="themes/theme-kuroir.js"></script>
+    <script src="themes/theme-merbivore.js"></script>
+    <script src="themes/theme-merbivore_soft.js"></script>
+    <script src="themes/theme-mono_industrial.js"></script>
+    <script src="themes/theme-monokai.js"></script>
+    <script src="themes/theme-pastel_on_dark.js"></script>
+    <script src="themes/theme-solarized_dark.js"></script>
+    <script src="themes/theme-solarized_light.js"></script>
+    <script src="themes/theme-sqlserver.js"></script>
+    <script src="themes/theme-terminal.js"></script>
+    <script src="themes/theme-textmate.js"></script>
+    <script src="themes/theme-tomorrow.js"></script>
+    <script src="themes/theme-tomorrow_night.js"></script>
+    <script src="themes/theme-tomorrow_night_blue.js"></script>
+    <script src="themes/theme-tomorrow_night_bright.js"></script>
+    <script src="themes/theme-tomorrow_night_eighties.js"></script>
     <script src="themes/theme-twilight.js"></script>
+    <script src="themes/theme-vibrant_ink.js"></script>
+
+
     <script src="mode-RBL.js"></script>
     <script>
         var editor = ace.edit("editor");
-        var test = "ace/theme/twilight"
-        editor.setTheme(test);
         editor.session.setMode("ace/mode/javascript");
+
+        function editorTheme(){
+            theme = document.getElementById("themes").value;
+            let theming = "ace/theme/"+theme;
+            editor.setTheme(theming);
+        }
+
+        let count = 0;
+        function darkMode(){
+            count +=1;
+            if(count%2==0){
+                document.getElementById('body').setAttribute("style", "background-color : white");
+                editor.setTheme('ace/theme/dreamweaver');
+            }else
+            {
+                document.getElementById('body').setAttribute("style", "background-color : black");
+                editor.setTheme('ace/theme/tomorrow_night_bright');
+            }
+
+            
+            
+
+        }
     </script>
 
 </body>

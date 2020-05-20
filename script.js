@@ -99,11 +99,12 @@ function displayResponse(response, element) {
     }
 
     if (message.messageType == 'success') {
-      
+        document.getElementById('response-block').setAttribute("style", "display:contents");
         messageElement.innerHTML = '&nbsp;&nbsp;&nbsp; Success :' + message.messageCode;
         document.getElementById('response-block').setAttribute("style" , "background-color : #BDFF9E");
     }
     else {
+        document.getElementById('response-block').setAttribute("style", "display:contents");
         document.getElementById('response-block').setAttribute("style" , "background-color : #ff6666");
         messageElement.innerHTML = '&nbsp;&nbsp;&nbsp; Error :' + message.messageCode + ': ' + message.message;
     }
