@@ -14,13 +14,17 @@ function execCmdWithArg(command , arg){
 function APIValidation(){
     //validate if BR and BR Type is populated
     let BRType = document.getElementById('file-type').value;
-    let BRRaw = document.getElementById('editor').innerText;
+    // let BRRaw = document.getElementById('editor').innerText;
+    let BRRaw = document.getElementsByClassName("ace_scroller")[0].innerText;
+    console.log(BRRaw)
 
     if(BRType == 'none' ){
-        alert('Select Type Of Business Rule');
+        // alert('Select Type Of Business Rule');
+        swal('','Select Type Of Business Rule','info')
     }
-    if(BRRaw == ''){
-        alert('There is noo Business Rule to Validate please enter the Business Rule before checking');
+    if(BRRaw == '' || BRRaw==null){
+        // alert('There is noo Business Rule to Validate please enter the Business Rule before checking');
+        swal('','There is noo Business Rule to Validate please enter the Business Rule before checking','info')
     }
 
     if(BRType!= 'none' && BRRaw !=''){
@@ -94,12 +98,14 @@ function displayResponse(response, element) {
      
     if (message.messageType == 'success') {
             swal(message.messageCode, "Success", "success");
+            console.log(message.message)
     }
     else {
         //document.getElementById('response-block').setAttribute("style", "display:contents");
         //document.getElementById('response-block').setAttribute("style" , "background-color : #ff6666");
        // messageElement.innerHTML = '&nbsp;&nbsp;&nbsp; Error :' + message.messageCode + ': ' + message.message;
        swal( message.messageCode, "Error", "error");
+       console.log(message.message)
     }
 }
 
