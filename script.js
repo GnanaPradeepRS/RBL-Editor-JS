@@ -16,8 +16,6 @@ function APIValidation(){
     let BRType = document.getElementById('file-type').value;
     let BRRaw = document.getElementById('editor').innerText;
 
-    console.log(BRRaw)
-
     if(BRType == 'none' ){
         alert('Select Type Of Business Rule');
     }
@@ -26,19 +24,15 @@ function APIValidation(){
     }
 
     if(BRType!= 'none' && BRRaw !=''){
-        resetstatus();
         let BR = convertToInline((BRRaw));
         ValidateBRFunction(BRType,BR);
     }
 }
 
-function resetstatus(){
-    document.getElementById('status').innerHTML = '';
-}
-
 function ValidateBRFunction(BRType,BR,element){
 
-    let URL = "http://manage.rdpdseu10.riversand-dataplatform.com:9095/brownthomasds/api/modelgovernservice/validate";
+    //let URL = "http://manage.rdpdseu10.riversand-dataplatform.com:9095/brownthomasds/api/modelgovernservice/validate";
+    let URL =   "http://manage.rdpdsna07.riversand-dataplatform.com:9095/academyds/api/modelgovernservice/validate"
 
     readTextFile("ValidateBRData.json" , function(text){
     postData = JSON.parse(text);
@@ -97,16 +91,15 @@ function displayResponse(response, element) {
 
         return;
     }
-
+     
     if (message.messageType == 'success') {
-        document.getElementById('response-block').setAttribute("style", "display:contents");
-        messageElement.innerHTML = '&nbsp;&nbsp;&nbsp; Success :' + message.messageCode;
-        document.getElementById('response-block').setAttribute("style" , "background-color : #BDFF9E");
+            swal(message.messageCode, "Success", "success");
     }
     else {
-        document.getElementById('response-block').setAttribute("style", "display:contents");
-        document.getElementById('response-block').setAttribute("style" , "background-color : #ff6666");
-        messageElement.innerHTML = '&nbsp;&nbsp;&nbsp; Error :' + message.messageCode + ': ' + message.message;
+        //document.getElementById('response-block').setAttribute("style", "display:contents");
+        //document.getElementById('response-block').setAttribute("style" , "background-color : #ff6666");
+       // messageElement.innerHTML = '&nbsp;&nbsp;&nbsp; Error :' + message.messageCode + ': ' + message.message;
+       swal( message.messageCode, "Error", "error");
     }
 }
 
@@ -168,29 +161,49 @@ function makeCorsRequest(url, data, callback, element) {
 
     xhr.onreadystatechange = function () {//Call a function when the state changes.
         if (xhr.readyState == 4 && xhr.status == 200) {
-            callback(xhr.responseText, element);
+           callback(xhr.responseText, element);
+         
         }
     }
 
     xhr.onerror = function () {
-        document.getElementById('status').innerHTML = 'Woops, there was an error making the request. Might be a browser issue.';
-        document.getElementById('readme').innerHTML = '&nbsp;&nbsp;&nbsp; <a style="font-weight:bold;" href="readme.html" target="_blank">Browser issues ?</a>';
+        //document.getElementById('status').innerHTML = 'Woops, there was an error making the request. Might be a browser issue.';
+       
+            swal("Woops, there was an error making the request. Might be a browser issue.", "Status", "warning");
+           
+            
+        //document.getElementById('readme').innerHTML = '&nbsp;&nbsp;&nbsp; <a style="font-weight:bold;" href="readme.html" target="_blank">Browser issues ?</a>';
     };
 
     xhr.send(data);
 }
 
 function wordFormat(){
-    let BRRaw = document.getElementById('editor').innerText;
+    let BRRaw = document.getElementsByClassName("ace_scroller")[0].innerText;
     console.log(BRRaw);
     let store = BRRaw
     console.log(store)
     let InlineBR = convertToInline(BRRaw);
     console.log(InlineBR)
-    document.getElementById('editor').innerText = InlineBR;
+   
+    document.getElementsByClassName("ace_scroller")[0].innerText = InlineBR;
+    document.getElementsByClassName("ace_gutter-cell")[0].innerText="1";
     document.getElementById('editor').setAttribute("contentEditable",true);
     return store;
 }
+
+
+// function wordFormat(){
+//     let BRRaw = document.getElementById('editor').innerText;
+//     console.log(BRRaw);
+//     let store = BRRaw
+//     console.log(store)
+//     let InlineBR = convertToInline(BRRaw);
+//     console.log(InlineBR)
+//     document.getElementById('editor').innerText = InlineBR;
+//     document.getElementById('editor').setAttribute("contentEditable",true);
+//     return store;
+// }
 
 function  inlineFormat(){
     let store = wordFormat();
