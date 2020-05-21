@@ -8,3 +8,16 @@
     height: auto;
 }
 
+.box{
+    padding:0.2em 0.1em;
+    border-radius: 5px;
+    color:#fff;
+    font-size:1.1em;
+    border:0;
+    cursor:pointer;
+
+  }
+option{
+    background-color: #fff;
+    color: black;
+}
