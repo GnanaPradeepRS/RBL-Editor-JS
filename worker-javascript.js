@@ -4764,7 +4764,7 @@ var JSHINT = (function() {
       } else if (state.option.nonew && r && r.left && r.id === "(" && r.left.id === "new") {
         warning("W031", t);
       }
-      parseFinalSemicolon();
+      //parseFinalSemicolon();
     }
 
     indent = i;
@@ -9797,7 +9797,7 @@ var errors = {
   E055: "The '{a}' option cannot be set after any executable code.",
   E056: "'{a}' was used before it was declared, which is illegal for '{b}' variables.",
   E057: "Invalid meta property: '{a}.{b}'.",
-  E058: "Missing semicolon."
+  //E058: "Missing semicolon."
 };
 
 var warnings = {

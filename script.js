@@ -1,24 +1,37 @@
 
 
 
+
 function editorTheme(){
     theme = document.getElementById("themes").value;
+    //let themeRetrive = theme;
     let theming = "ace/theme/"+theme;
+    localStorage.setItem('themekey', theming);
     editor.setTheme(theming);
 }
+
+
 
 let count = 1;
 
 function darkMode(){
     count +=1;
+    localStorage.setItem('countkey' , count );
     if(count%2==0){
-        document.getElementById('body').setAttribute("style", "background-color : #1a1a1a");
-        editor.setTheme('ace/theme/tomorrow_night_bright');
+        dark();
     }else
     {
-        document.getElementById('body').setAttribute("style", "background-color : white");
-        editor.setTheme('ace/theme/dreamweaver');
+        bright();
     }
+}
+
+function dark(){
+    document.getElementById('body').setAttribute("style", "background-color : #1a1a1a");
+    editor.setTheme('ace/theme/tomorrow_night_bright');
+}
+function bright(){
+    document.getElementById('body').setAttribute("style", "background-color : white");
+    editor.setTheme('ace/theme/dreamweaver');
 }
 
 function execCmd(command){
@@ -55,7 +68,9 @@ function ValidateBRFunction(BRType,BR,element){
 
     // let URL = "http://manage.rdpdseu10.riversand-dataplatform.com:9095/brownthomasds/api/modelgovernservice/validate";
 
+    
     let URL ="http://manage.rdpdsna07.riversand-dataplatform.com:9095/academyds/api/modelgovernservice/validate"
+    URL = document.getElementById('defaultForm-email').value;
 
     readTextFile("ValidateBRData.json" , function(text){
     postData = JSON.parse(text);
@@ -203,13 +218,18 @@ function makeCorsRequest(url, data, callback, element) {
 }
 
 function wordFormat(){
-    let BRRaw = document.getElementsByClassName("ace_scroller")[0].innerText;
-    let store = BRRaw
-    let InlineBR = convertToInline(BRRaw);
-    document.getElementsByClassName("ace_scroller")[0].innerText = InlineBR;
-    document.getElementsByClassName("ace_gutter-cell")[0].innerText="1";
-    document.getElementById('editor').setAttribute("contentEditable",true);
-    return store;
+    editor.session.setUseWrapMode(true);
+    
+    // let BRRaw = document.getElementsByClassName("ace_scroller")[0].innerText;
+
+    // let store = BRRaw
+    // let InlineBR = convertToInline(BRRaw);
+    // document.getElementsByClassName("ace_scroller")[0].innerText = InlineBR;
+   
+   
+    // document.getElementsByClassName("ace_gutter-cell")[0].innerText="1";
+    
+    //return store; 
 }
 
 // function wordFormat(){
@@ -232,8 +252,20 @@ function  inlineFormat(){
 
 
 function convertToInline(BRRaw) {
+   
     let BR=  BRRaw.replace(/(\r\n|\n|\r)/gm, "").replace(/\s+/g, " ").replace(/[ \t\r]+/g, " ");
-    
+
+
+    // let BR = BRRaw.replace("," + kews[i] + "[", ",\n\t" + kews[i] + "[")
+    //                     .replace("~" + kews[i] + "[", "~\n\t" + kews[i] + "[")
+    //                     .replace(",\n\n\t\t" + kews[i] + "[", ",\n\t" + kews[i] + "[")
+    //                     .replace("~\n\n\t\t" + kews[i] + "[", "~\n\t" + kews[i] + "[")
+    //                     .replace("AND " + kews[i] + "[", " AND\n" + kews[i] + "[")
+    //                     .replace("AND  " + kews[i] + "[", " AND\n" + kews[i] + "[")
+    //                     .replace("  AND\n\n" + kews[i] + "[", " AND\n" + kews[i] + "[")
+    //                     .replace("OR " + kews[i] + "[", " OR\n" + kews[i] + "[")
+    //                     .replace("OR  " + kews[i] + "[", " OR\n" + kews[i] + "[")
+    //                     .replace("  OR\n\n" + kews[i] + "[", " OR\n" + kews[i] + "[")
     return BR;
 }
 
@@ -256,10 +288,42 @@ function lineNumbering(){
 }
 
 function clearEditor(){
-   location.reload();
+
+    location.reload();
+
+}
+let reloadCount = 0;
+window.onload = function(){
+    reloadCount+=1;
+    let countRetrive = localStorage.getItem('countkey')
+    if(countRetrive%2==0){
+        dark();
+    }else
+    {
+        bright();
+    }
+
+    let themeRetrive = localStorage.getItem('themekey');
+    if(reloadCount>0){
+        editor.setTheme(themeRetrive);
+    }
+    
+    
+}
+
+
+function selection(){
+    editor.selectAll();
 }
 
 function copy(){
+    editor.focus();
+    selection();
     document.execCommand("copy");
 
 }
+
+function Editmode(){
+    document.isContentEditable = true;
+}
+
